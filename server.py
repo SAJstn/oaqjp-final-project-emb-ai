@@ -20,15 +20,13 @@ def sent_analyzer():
     sadness_score = response['sadness']
     dominant_emotion = response['dominant_emotion']
 
-    # Return a formatted string with the sentiment label and score
-    return "For the given statement, the system response is 'anger': {}, 'disgust': {}, 'fear':{}, 'joy': {}, and 'sadness': {}. The dominant emotion is {}.".format(anger_score, disgust_score, fear_score, joy_score, sadness_score, dominant_emotion)
+    # Check if the anger_score is None, indicating an error or invalid input
+    if anger_score is None:
+        return " Invalid text! Please try again!."
 
-
-
-    # Ref    
-    # return {'anger': anger_score, 'disgust': disgust_score, 'fear': fear_score, 'joy': joy_score, 'sad': sadness_score, 'dominant_emotion': dominant_emotion}
-
-    # return "The given text has been identified as {} with a score of {}.".format(label.split('_')[1], score)
+    else:
+        # Return a formatted string with the sentiment label and score
+        return "For the given statement, the system response is 'anger': {}, 'disgust': {}, 'fear':{}, 'joy': {}, and 'sadness': {}. The dominant emotion is {}.".format(anger_score, disgust_score, fear_score, joy_score, sadness_score, dominant_emotion)
 
 @app.route("/")
 def render_index_page():
