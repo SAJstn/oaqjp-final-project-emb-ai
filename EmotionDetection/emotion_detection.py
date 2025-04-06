@@ -16,6 +16,7 @@ def emotion_detector(text_to_analyse):
     
     # Parse the response from the API
     formatted_response = json.loads(response.text)['emotionPredictions']
+    #return formatted_response['emotionPredictions']
     
     # If the response status code is 200, extract all required values from the response
     if response.status_code == 200:
