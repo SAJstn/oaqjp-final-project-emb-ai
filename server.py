@@ -1,3 +1,7 @@
+"""
+This is a server.py for final project.
+"""
+
 from flask import Flask, render_template, request
 from EmotionDetection.emotion_detection import emotion_detector
 
@@ -6,6 +10,9 @@ app = Flask("Emotion Detector")
 @app.route("/emotionDetector")
 
 def sent_analyzer():
+    """
+    Receive the user input to the emotion detector
+    """
     # Retrieve the text to analyze from the request arguments
     text_to_analyzer = request.args.get('textToAnalyze')
 
@@ -24,12 +31,19 @@ def sent_analyzer():
     if anger_score is None:
         return " Invalid text! Please try again!."
 
-    else:
-        # Return a formatted string with the sentiment label and score
-        return "For the given statement, the system response is 'anger': {}, 'disgust': {}, 'fear':{}, 'joy': {}, and 'sadness': {}. The dominant emotion is {}.".format(anger_score, disgust_score, fear_score, joy_score, sadness_score, dominant_emotion)
+    # Return a formatted string with the sentiment label and score
+    return (
+        f"For the given statement, the system response is "
+        f"'anger': {anger_score}, 'disgust': {disgust_score}, "
+        f"'fear':{fear_score}, 'joy': {joy_score}, and 'sadness': {sadness_score}. "
+        f"The dominant emotion is {dominant_emotion}."
+    )
 
 @app.route("/")
 def render_index_page():
+    """
+    Render the index_page
+    """
     return render_template('index.html')
 
 if __name__ == "__main__":
